@@ -101,10 +101,10 @@ public class UtilisateurTest {
 	@Test
 	public void testGetNiveau() {
 		int niveau1 = utilisateur1.getNiveau();
-		assertEquals("Test getId", 0, niveau1);
+		assertEquals("Test getNiveau", 0, niveau1);
 		
 		int niveau2 = utilisateur2.getNiveau();
-		assertEquals("Test getId", 1, niveau2);
+		assertEquals("Test getNiveau", 1, niveau2);
 	}
 
 	@Test
