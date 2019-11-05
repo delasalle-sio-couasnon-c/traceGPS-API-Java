@@ -56,12 +56,17 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetMdpSha1() {
-		fail("Not yet implemented");
+		String mdp1 = utilisateur1.getMdpSha1();
+		assertEquals("Test GetMdpSha1", "", mdp1);
+		
+		String mdp2 = utilisateur2.getMdpSha1();
+		assertEquals("Test GetMdpSha1", "abcdef", mdp2);	
 	}
 
 	@Test
 	public void testSetMdpSha1() {
-		fail("Not yet implemented");
+		utilisateur1.setMdpSha1("cococoucou");
+		assertEquals("Test SetMdpSha1", "cococoucou", utilisateur1.getMdpSha1());
 	}
 
 	@Test
