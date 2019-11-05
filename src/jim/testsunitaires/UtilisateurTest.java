@@ -100,12 +100,17 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetNiveau() {
-		fail("Not yet implemented");
+		int niveau1 = utilisateur1.getNiveau();
+		assertEquals("Test getId", 0, niveau1);
+		
+		int niveau2 = utilisateur2.getNiveau();
+		assertEquals("Test getId", 1, niveau2);
 	}
 
 	@Test
 	public void testSetNiveau() {
-		fail("Not yet implemented");
+		utilisateur1.setNiveau(19);
+		assertEquals("Test SetNiveau", 19, utilisateur1.getNiveau());
 	}
 
 	@Test
