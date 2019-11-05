@@ -83,12 +83,14 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetNumTel() {
-		fail("Not yet implemented");
+		assertEquals("Test GetNumTel", "", utilisateur1.getNumTel());
+		assertEquals("Test GetNumTel", "1122334455", utilisateur2.getNumTel());
 	}
 
 	@Test
 	public void testSetNumTel() {
-		fail("Not yet implemented");
+		utilisateur1.setNumTel("9988776655");
+		assertEquals("Test SetNumTel", "9988776655", utilisateur1.getNumTel());
 	}
 
 	@Test
