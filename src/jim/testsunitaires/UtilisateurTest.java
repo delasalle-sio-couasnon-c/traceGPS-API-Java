@@ -34,12 +34,17 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetId() {
-		fail("Not yet implemented");	
+		int id1 = utilisateur1.getId();
+		assertEquals("Test getId", 0, id1);
+		
+		int id2 = utilisateur2.getId();
+		assertEquals("Test getId", 111, id2);
 	}
 
 	@Test
 	public void testSetId() {
-		fail("Not yet implemented");
+		utilisateur1.getId();
+		assertEquals("TestSetLatitude", 0, utilisateur1.getId());
 	}
 
 	@Test
