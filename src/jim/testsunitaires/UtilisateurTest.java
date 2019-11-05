@@ -151,7 +151,8 @@ public class UtilisateurTest {
 
 	@Test
 	public void testSetDateDerniereTrace() throws ParseException {
-		fail("Not yet implemented");
+		utilisateur1.setDateDerniereTrace(Outils.convertirEnDateHeure("05/11/2019 17:05:00"));
+		assertEquals("Test setDateDerniereTrace", "05/11/2019 17:05:00", Outils.formaterDateHeureFR(utilisateur1.getDateDerniereTrace()));
 	}
 
 	@Test
