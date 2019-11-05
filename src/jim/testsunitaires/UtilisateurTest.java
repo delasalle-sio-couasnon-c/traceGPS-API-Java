@@ -142,7 +142,11 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetDateDerniereTrace() {
-		fail("Not yet implemented");
+		Date debut1 = utilisateur1.getDateDerniereTrace();
+		assertNull("Test GetDateDerniereTrace", debut1);
+		
+		String debut2 = Outils.formaterDateHeureFR(utilisateur2.getDateDerniereTrace());
+		assertEquals("Test GetDateDerniereTrace", "28/06/2016 14:00:00", debut2);
 	}
 
 	@Test
