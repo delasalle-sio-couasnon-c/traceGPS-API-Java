@@ -89,13 +89,13 @@ public class UtilisateurTest {
 	@Test
 	public void testGetNumTel() {
 		assertEquals("Test GetNumTel", "", utilisateur1.getNumTel());
-		assertEquals("Test GetNumTel", "1122334455", utilisateur2.getNumTel());
+		assertEquals("Test GetNumTel", "11.22.33.44.55", utilisateur2.getNumTel());
 	}
 
 	@Test
 	public void testSetNumTel() {
 		utilisateur1.setNumTel("9988776655");
-		assertEquals("Test SetNumTel", "9988776655", utilisateur1.getNumTel());
+		assertEquals("Test SetNumTel", "99.88.77.66.55", utilisateur1.getNumTel());
 	}
 
 	@Test
