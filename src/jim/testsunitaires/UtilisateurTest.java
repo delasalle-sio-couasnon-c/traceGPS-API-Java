@@ -43,8 +43,8 @@ public class UtilisateurTest {
 
 	@Test
 	public void testSetId() {
-		utilisateur1.getId();
-		assertEquals("TestSetLatitude", 0, utilisateur1.getId());
+		utilisateur1.setId(1);
+		assertEquals("TestSetLatitude", 1, utilisateur1.getId());
 	}
 
 	@Test
