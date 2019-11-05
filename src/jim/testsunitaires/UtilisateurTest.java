@@ -110,12 +110,17 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetDateCreation() {
-		fail("Not yet implemented");
+		Date debut1 = utilisateur1.getDateCreation();
+		assertNull("Test getDateCreation", debut1);
+		
+		String debut2 = Outils.formaterDateHeureFR(utilisateur2.getDateCreation());
+		assertEquals("Test getDateCreation", "21/06/2016 14:00:00", debut2);	
 	}
 
 	@Test
 	public void testSetDateCreation() throws ParseException {
-		fail("Not yet implemented");
+		utilisateur1.setDateCreation(Outils.convertirEnDateHeure("26/06/2016 14:00:00"));
+		assertEquals("Test setDateCreation", "26/06/2016 14:00:00", Outils.formaterDateHeureFR(utilisateur1.getDateCreation()));	
 	}
 
 	@Test
