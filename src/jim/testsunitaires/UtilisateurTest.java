@@ -49,22 +49,29 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetPseudo() {
-		fail("Not yet implemented");
+		assertEquals("Test getPseudo", "", utilisateur1.getPseudo());
+		assertEquals("Test getPseudo", "toto", utilisateur2.getPseudo());;
 	}
 
 	@Test
 	public void testSetPseudo() {
-		fail("Not yet implemented");
+		utilisateur1.setPseudo("Yvan");
+		assertEquals("Test setPseudo", "Yvan", utilisateur1.getPseudo());
 	}
 
 	@Test
 	public void testGetMdpSha1() {
-		fail("Not yet implemented");
+		String mdp1 = utilisateur1.getMdpSha1();
+		assertEquals("Test GetMdpSha1", "", mdp1);
+		
+		String mdp2 = utilisateur2.getMdpSha1();
+		assertEquals("Test GetMdpSha1", "abcdef", mdp2);	
 	}
 
 	@Test
 	public void testSetMdpSha1() {
-		fail("Not yet implemented");
+		utilisateur1.setMdpSha1("cococoucou");
+		assertEquals("Test SetMdpSha1", "cococoucou", utilisateur1.getMdpSha1());
 	}
 
 	@Test
@@ -79,12 +86,14 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetNumTel() {
-		fail("Not yet implemented");
+		assertEquals("Test GetNumTel", "", utilisateur1.getNumTel());
+		assertEquals("Test GetNumTel", "1122334455", utilisateur2.getNumTel());
 	}
 
 	@Test
 	public void testSetNumTel() {
-		fail("Not yet implemented");
+		utilisateur1.setNumTel("9988776655");
+		assertEquals("Test SetNumTel", "9988776655", utilisateur1.getNumTel());
 	}
 
 	@Test
