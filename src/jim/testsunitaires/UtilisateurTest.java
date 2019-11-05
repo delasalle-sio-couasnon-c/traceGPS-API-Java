@@ -120,12 +120,14 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetNbTraces() {
-		fail("Not yet implemented");
+		assertEquals("Test GetNbTraces", 0, utilisateur1.getNbTraces());
+		assertEquals("Test GetNbTraces", 3, utilisateur2.getNbTraces());
 	}
 
 	@Test
 	public void testSetNbTraces() {
-		fail("Not yet implemented");
+		utilisateur1.setNbTraces(2);
+		assertEquals("Test SetNbTraces", 2, utilisateur1.getNbTraces());
 	}
 
 	@Test
