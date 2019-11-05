@@ -45,7 +45,7 @@ public class UtilisateurTest {
 	@Test
 	public void testGetPseudo() {
 		assertEquals("Test getPseudo", "", utilisateur1.getPseudo());
-		assertEquals("Test getPseudo", "toto", utilisateur2.getPseudo());;
+		assertEquals("Test getPseudo", "toto", utilisateur2.getPseudo());
 	}
 
 	@Test
@@ -71,12 +71,14 @@ public class UtilisateurTest {
 
 	@Test
 	public void testGetAdrMail() {
-		fail("Not yet implemented");
+		assertEquals("Test getAdresse", "", utilisateur1.getAdrMail());
+		assertEquals("Test getPseudo", "toto@free.fr", utilisateur2.getAdrMail());;
 	}
 
 	@Test
 	public void testSetAdrMail() {
-		fail("Not yet implemented");
+		utilisateur1.setAdrMail("delasalle.sio.fortounatto.y@gmail.com");;
+		assertEquals("Test setPseudo", "delasalle.sio.fortounatto.y@gmail.com", utilisateur1.getAdrMail());
 	}
 
 	@Test
