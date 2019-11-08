@@ -60,7 +60,7 @@ public class PasserelleServicesWebXMLCorentin extends PasserelleXML {
 		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
 			String urlDuServiceWeb = _adresseHebergeur + _urlConnecter;
 			urlDuServiceWeb += "?pseudo=" + pseudo;
-			urlDuServiceWeb += "&mdpSha1=" + mdpSha1;
+			urlDuServiceWeb += "&mdp=" + mdpSha1;
 
 			// création d'un flux en lecture (InputStream) à partir du service
 			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
@@ -290,7 +290,7 @@ public class PasserelleServicesWebXMLCorentin extends PasserelleXML {
 	//    lesUtilisateurs : collection (vide) à remplir à partir des données fournies par le service web
 	public static String getLesUtilisateursQuiMautorisent(String pseudo, String mdpSha1, ArrayList<Utilisateur> lesUtilisateurs)
 	{
-		return "";				// METHODE A CREER ET TESTER
+		return "";
 	}
 
 	// Méthode statique pour demander une autorisation (service DemanderUneAutorisation)
