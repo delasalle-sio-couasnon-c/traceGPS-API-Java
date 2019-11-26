@@ -404,7 +404,7 @@ public class PasserelleServicesWebXMLYvan extends PasserelleXML {
 		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
 			String urlDuServiceWeb = _adresseHebergeur + _urlRetirerUneAutorisation;
 			urlDuServiceWeb += "?pseudo=" + pseudo;
-			urlDuServiceWeb += "&mdpSha1=" + mdpSha1;
+			urlDuServiceWeb += "&mdp=" + mdpSha1;
 			urlDuServiceWeb += "&pseudoARetirer=" + pseudoARetirer;
 			urlDuServiceWeb += "&texteMessage=" + texteMessage;
 
