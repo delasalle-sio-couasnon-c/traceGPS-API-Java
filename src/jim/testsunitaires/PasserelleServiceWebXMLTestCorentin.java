@@ -102,13 +102,13 @@ public class PasserelleServiceWebXMLTestCorentin {
 		String msg = PasserelleServicesWebXMLCorentin.demanderUneAutorisation("europa", Outils.sha1("mdputilisateurrrrrr"), "toto", "", "");
 		assertEquals("Erreur : données incomplètes.", msg);
 
-		msg = PasserelleServicesWebXMLCorentin.demanderUneAutorisation("europa", Outils.sha1("mdputilisateurrrrrr"), "toto", "coucou", "charles-edouard");
+		msg = PasserelleServicesWebXMLCorentin.demanderUneAutorisation("luna", Outils.sha1("mdputilisateurrrrrr"), "toto", "coucou", "charles-edouard");
 		assertEquals("Erreur : authentification incorrecte.", msg);
 		
-		msg = PasserelleServicesWebXMLCorentin.demanderUneAutorisation("europa", Outils.sha1("mdputilisateur"), "toto", "coucou", "charles-edouard");
+		msg = PasserelleServicesWebXMLCorentin.demanderUneAutorisation("luna", Outils.sha1("mdputilisateur"), "totoo", "coucou", "charles-edouard");
 		assertEquals("Erreur : pseudo utilisateur inexistant.", msg);
 		
-		msg = PasserelleServicesWebXMLCorentin.demanderUneAutorisation("europa", Outils.sha1("mdputilisateur"), "galileo", "coucou", "charles-edouard");
+		msg = PasserelleServicesWebXMLCorentin.demanderUneAutorisation("luna", Outils.sha1("mdputilisateur"), "galileo", "coucou", "charles-edouard");
 		assertEquals("galileo va recevoir un courriel avec votre demande.", msg);	
 	}
 

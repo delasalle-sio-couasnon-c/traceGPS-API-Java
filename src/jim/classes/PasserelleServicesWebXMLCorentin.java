@@ -327,12 +327,12 @@ public class PasserelleServicesWebXMLCorentin extends PasserelleXML {
 		String reponse = "";
 		try
 		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
-			String urlDuServiceWeb = _adresseHebergeur + _urlDemanderMdp;
+			String urlDuServiceWeb = _adresseHebergeur + _urlDemanderUneAutorisation;
 			urlDuServiceWeb += "?pseudo=" + pseudo;
-			urlDuServiceWeb += "?mdp=" + mdpSha1;
-			urlDuServiceWeb += "?pseudoDestinataire=" + pseudoDestinataire;
-			urlDuServiceWeb += "?texteMessage=" + texteMessage;
-			urlDuServiceWeb += "?nomPrenom=" + nomPrenom;
+			urlDuServiceWeb += "&mdp=" + mdpSha1;
+			urlDuServiceWeb += "&pseudoDestinataire=" + pseudoDestinataire;
+			urlDuServiceWeb += "&texteMessage=" + texteMessage;
+			urlDuServiceWeb += "&nomPrenom=" + nomPrenom;
 
 			// création d'un flux en lecture (InputStream) à partir du service
 			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
