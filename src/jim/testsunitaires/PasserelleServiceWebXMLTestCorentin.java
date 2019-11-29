@@ -124,8 +124,15 @@ public class PasserelleServiceWebXMLTestCorentin {
 
 	@Test
 	public void testDemarrerEnregistrementParcours() {
-		fail("Not yet implemented");
+		Trace laTrace = new Trace();
+		String msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateurrrrrr"), laTrace);
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		laTrace = new Trace();
+		msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), laTrace);
+		assertEquals("Trace créée.", msg);	
 	}
+
 
 	@Test
 	public void testArreterEnregistrementParcours() {
