@@ -125,11 +125,11 @@ public class PasserelleServiceWebXMLTestCorentin {
 	@Test
 	public void testDemarrerEnregistrementParcours() {
 		Trace laTrace = new Trace();
-		String msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateurrrrrr"), laTrace);
+		String msg = PasserelleServicesWebXMLCorentin.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateurrrrrr"), laTrace);
 		assertEquals("Erreur : authentification incorrecte.", msg);
 		
 		laTrace = new Trace();
-		msg = PasserelleServicesWebXML.demarrerEnregistrementParcours("europa", Outils.sha1("mdputilisateur"), laTrace);
+		msg = PasserelleServicesWebXMLCorentin.demarrerEnregistrementParcours("galileo", Outils.sha1("mdputilisateur"), laTrace);
 		assertEquals("Trace créée.", msg);	
 	}
 
@@ -141,7 +141,18 @@ public class PasserelleServiceWebXMLTestCorentin {
 	
 	@Test
 	public void testSupprimerUnUnParcours() {
-		fail("Not yet implemented");
+		String msg = PasserelleServicesWebXMLCorentin.supprimerUnParcours("europa", Outils.sha1("mdputilisateurrrrrr"), 10);
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		msg = PasserelleServicesWebXMLCorentin.supprimerUnParcours("indigo", "13e3668bbee30b004380052b086457b014504b3e", 100);
+		assertEquals("Erreur : parcours inexistant.", msg);
+		
+		msg = PasserelleServicesWebXMLCorentin.supprimerUnParcours("indigo", "13e3668bbee30b004380052b086457b014504b3e", 22);
+		assertEquals("Erreur : vous n'êtes pas le propriétaire de ce parcours.", msg);	
+		
+		msg = PasserelleServicesWebXMLCorentin.supprimerUnParcours("indigo", "13e3668bbee30b004380052b086457b014504b3e", 9);
+		assertEquals("Parcours supprimé.", msg);	
 	}
+
 	
 } // fin du test
