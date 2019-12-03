@@ -77,7 +77,7 @@ public class UtilisateurTest {
 	@Test
 	public void testGetAdrMail() {
 		assertEquals("Test getAdresse", "", utilisateur1.getAdrMail());
-		assertEquals("Test getPseudo", "toto@free.fr", utilisateur2.getAdrMail());;
+		assertEquals("Test getPseudo", "toto@free.fr", utilisateur2.getAdrMail());
 	}
 
 	@Test

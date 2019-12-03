@@ -25,7 +25,7 @@ public class PasserelleServicesWebXMLGuillaume extends PasserelleXML {
 	// Adresse de l'hébergeur Internet
 	//private static String _adresseHebergeur = "http://sio.lyceedelasalle.fr/tracegps/api/";
 	// Adresse du localhost en cas d'exécution sur le poste de développement (projet de tests des classes)
-	private static String _adresseHebergeur = "http://127.0.0.1/ws-php-cartron/tracegps/api/";
+	private static String _adresseHebergeur = "http://127.0.0.1/ws-php-onfray/tracegps/api/";
 
 	// Noms des services web déjà traités par la passerelle
 	private static String _urlArreterEnregistrementParcours = "ArreterEnregistrementParcours";
@@ -323,7 +323,36 @@ public class PasserelleServicesWebXMLGuillaume extends PasserelleXML {
 	//    lePoint : un objet PointDeTrace (vide) qui permettra de récupérer le numéro attribué à partir des données fournies par le service web
 	public static String envoyerPosition(String pseudo, String mdpSha1, PointDeTrace lePoint)
 	{
-		return "";				// METHODE A CREER ET TESTER
+		String reponse = "";
+		try
+		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
+			String urlDuServiceWeb = _adresseHebergeur + _urlEnvoyerPosition;
+			urlDuServiceWeb += "?pseudo=" + pseudo;
+			urlDuServiceWeb += "&mdp="+ mdpSha1;
+			urlDuServiceWeb += "&idTrace=" + lePoint.getIdTrace();
+			urlDuServiceWeb += "&dateHeure=" + lePoint.getDateHeure();
+			urlDuServiceWeb += "&latitude=" + lePoint.getLatitude();
+			urlDuServiceWeb += "&longitude=" + lePoint.getLongitude();
+			urlDuServiceWeb += "&altitude=" + lePoint.getAltitude();
+			urlDuServiceWeb += "&rythmeCardio=" + lePoint.getRythmeCardio();
+
+			// création d'un flux en lecture (InputStream) à partir du service
+			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+			// création d'un objet org.w3c.dom.Document à partir du flux ; il servira à parcourir le flux XML
+			Document leDocument = getDocumentXML(unFluxEnLecture);
+
+			// parsing du flux XML
+			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+
+			// retour de la réponse du service web
+			return reponse;
+		}
+		catch (Exception ex)
+		{	String msg = "Erreur : " + ex.getMessage();
+			return msg;
+		}
 	}
 	
 	// Méthode statique pour obtenir un parcours et la liste de ses points (service GetUnParcoursEtSesPoints)
