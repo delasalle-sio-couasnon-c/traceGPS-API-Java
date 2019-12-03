@@ -413,7 +413,30 @@ public class PasserelleServicesWebXMLCorentin extends PasserelleXML {
 	//    laTrace : un objet Trace (vide) à remplir à partir des données fournies par le service web
 	public static String demarrerEnregistrementParcours(String pseudo, String mdpSha1, Trace laTrace)
 	{
-		return "";				// METHODE A CREER ET TESTER A FAIRE
+		String reponse = "";
+		try
+		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
+			String urlDuServiceWeb = _adresseHebergeur + _urlDemarrerEnregistrementParcours;
+			urlDuServiceWeb += "?pseudo=" + pseudo;
+			urlDuServiceWeb += "&mdp=" + mdpSha1;
+
+			// création d'un flux en lecture (InputStream) à partir du service
+			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+			// création d'un objet org.w3c.dom.Document à partir du flux ; il servira à parcourir le flux XML
+			Document leDocument = getDocumentXML(unFluxEnLecture);
+
+			// parsing du flux XML
+			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+
+			// retour de la réponse du service web
+			return reponse;
+		}
+		catch (Exception ex)
+		{	String msg = "Erreur : " + ex.getMessage();
+			return msg;
+		}
 	}
 		
 	// Méthode statique pour terminer l'enregistrement d'un parcours (service ArreterEnregistrementParcours)
