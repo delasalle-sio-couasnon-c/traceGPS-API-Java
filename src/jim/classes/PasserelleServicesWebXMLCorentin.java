@@ -382,7 +382,89 @@ public class PasserelleServicesWebXMLCorentin extends PasserelleXML {
 	//    laTrace : objet Trace (vide) à remplir à partir des données fournies par le service web
 	public static String getUnParcoursEtSesPoints(String pseudo, String mdpSha1, int idTrace, Trace laTrace)
 	{
-		return "";				// METHODE A CREER ET TESTER A FAIRE
+		String reponse = "";
+		try
+		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
+			String urlDuServiceWeb = _adresseHebergeur + _urlGetUnParcoursEtSesPoints;
+			urlDuServiceWeb += "?pseudo=" + pseudo;
+			urlDuServiceWeb += "&mdp=" + mdpSha1;
+			urlDuServiceWeb += "&idTrace=" + idTrace;
+
+			// création d'un flux en lecture (InputStream) à partir du service
+			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+			// création d'un objet org.w3c.dom.Document à partir du flux ; il servira à parcourir le flux XML
+			Document leDocument = getDocumentXML(unFluxEnLecture);
+
+			// parsing du flux XML
+			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+			
+			if (reponse.equals("Données de la trace demandée.")) {
+				racine = (Element) leDocument.getElementsByTagName("trace").item(0);
+				laTrace.setId(Integer.valueOf(racine.getElementsByTagName("id").item(0).getTextContent()));
+				laTrace.setDateHeureDebut(Outils.convertirEnDateHeure(racine.getElementsByTagName("dateHeureDebut").item(0).getTextContent()));
+				String terminee = racine.getElementsByTagName("terminee").item(0).getTextContent();
+				if (terminee.equals("0")) laTrace.setTerminee(false);
+				else laTrace.setTerminee(true);
+				if (laTrace.getTerminee()) {
+					laTrace.setDateHeureFin(Outils.convertirEnDateHeure(racine.getElementsByTagName("dateHeureFin").item(0).getTextContent()));
+				}
+				laTrace.setIdUtilisateur(Integer.valueOf(racine.getElementsByTagName("idUtilisateur").item(0).getTextContent()));
+			}
+
+			NodeList listeNoeudsPoints = leDocument.getElementsByTagName("point");
+			/* Exemple de données obtenues pour un utilisateur :
+			<data>
+				<reponse>Données de la trace demandée.</reponse>
+				<donnees>
+					<trace>
+						<id>2</id>
+						<dateHeureDebut>2018-01-19 13:08:48</dateHeureDebut>
+						<terminee>0</terminee>
+						<dateHeureFin/>
+						<idUtilisateur>2</idUtilisateur>
+					</trace>
+					<point>
+						<idPoint>1</idPoint>
+						<latitude>48.2109</latitude>
+						<longitude>-1.5535</longitude>
+						<altitude>60</altitude>
+						<dateHeure>2018-01-19 13:08:48</dateHeure>
+						<rythmeCardiaque>81</rythmeCardiaque>
+					</point>
+			 */
+
+			// vider d'abord la collection avant de la remplir
+			laTrace.viderListePoints();
+
+			// parcours de la liste des noeuds <utilisateur> et ajout dans la collection lesUtilisateurs
+			for (int i = 0 ; i <= listeNoeudsPoints.getLength()-1 ; i++)
+			{	// création de l'élément courant à chaque tour de boucle
+				Element courant = (Element) listeNoeudsPoints.item(i);
+
+				// lecture des balises intérieures
+				int unIdPoint = Integer.parseInt(courant.getElementsByTagName("idPoint").item(0).getTextContent());
+				double uneLat = Double.valueOf(courant.getElementsByTagName("latitude").item(0).getTextContent());
+				double uneLong = Double.valueOf(courant.getElementsByTagName("longitude").item(0).getTextContent());
+				double uneAlt = Double.valueOf(courant.getElementsByTagName("altitude").item(0).getTextContent());
+				Date uneDateHeure = Outils.convertirEnDate(courant.getElementsByTagName("dateHeure").item(0).getTextContent(), formatDateUS);
+				int unRythmeCardiaque = Integer.parseInt(courant.getElementsByTagName("rythmeCardiaque").item(0).getTextContent());
+
+				// crée un objet Utilisateur
+				PointDeTrace unPDT = new PointDeTrace(idTrace, unIdPoint, uneLat, uneLong, uneAlt, uneDateHeure, unRythmeCardiaque);
+
+				// ajoute l'utilisateur à la collection lesUtilisateurs
+				laTrace.ajouterPoint(unPDT);
+			}
+
+			// retour de la réponse du service web
+			return reponse;
+		}
+		catch (Exception ex)
+		{	String msg = "Erreur : " + ex.getMessage();
+			return msg;
+		}
 	}
 	
 	// Méthode statique pour obtenir la liste des parcours d'un utilisateur (service GetLesParcoursDunUtilisateur)
@@ -403,7 +485,31 @@ public class PasserelleServicesWebXMLCorentin extends PasserelleXML {
 	//   idTrace : l'id de la trace à supprimer
 	public static String supprimerUnParcours(String pseudo, String mdpSha1, int idTrace)
 	{
-		return "";				// METHODE A CREER ET TESTER
+		String reponse = "";
+		try
+		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
+			String urlDuServiceWeb = _adresseHebergeur + _urlSupprimerUnParcours;
+			urlDuServiceWeb += "?pseudo=" + pseudo;
+			urlDuServiceWeb += "&mdp=" + mdpSha1;
+			urlDuServiceWeb += "&idTrace=" + idTrace;
+
+			// création d'un flux en lecture (InputStream) à partir du service
+			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+			// création d'un objet org.w3c.dom.Document à partir du flux ; il servira à parcourir le flux XML
+			Document leDocument = getDocumentXML(unFluxEnLecture);
+
+			// parsing du flux XML
+			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+
+			// retour de la réponse du service web
+			return reponse;
+		}
+		catch (Exception ex)
+		{	String msg = "Erreur : " + ex.getMessage();
+			return msg;
+		}
 	}
 	
 	// Méthode statique pour démarrer l'enregistrement d'un parcours (service DemarrerEnregistrementParcours)
@@ -429,7 +535,17 @@ public class PasserelleServicesWebXMLCorentin extends PasserelleXML {
 			// parsing du flux XML
 			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
 			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
-
+			
+			if (reponse.equals("Trace créée.")) {
+				racine = (Element) leDocument.getElementsByTagName("trace").item(0);
+				laTrace.setId(Integer.valueOf(racine.getElementsByTagName("id").item(0).getTextContent()));
+				laTrace.setDateHeureDebut(Outils.convertirEnDateHeure(racine.getElementsByTagName("dateDebut").item(0).getTextContent()));
+				String terminee = racine.getElementsByTagName("terminee").item(0).getTextContent();
+				if (terminee.equals("0")) laTrace.setTerminee(false);
+				else laTrace.setTerminee(true);
+				laTrace.setIdUtilisateur(Integer.valueOf(racine.getElementsByTagName("idUtilisateur").item(0).getTextContent()));
+			}
+			
 			// retour de la réponse du service web
 			return reponse;
 		}
