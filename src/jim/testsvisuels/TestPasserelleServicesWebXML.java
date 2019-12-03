@@ -58,35 +58,6 @@ public class TestPasserelleServicesWebXML {
 		
 		// test visuel de la méthode getUnParcoursEtSesPoints
 		
-		
-<<<<<<< HEAD
-//		msg = PasserelleServicesWebXMLCorentin.connecter("admin", "adminnnnnnnn");
-//		//Erreur : authentification incorrecte.
-//		System.out.println(msg);
-//		msg = PasserelleServicesWebXMLCorentin.connecter("admin", Outils.sha1("mdpadmin"));
-//		//Administrateur authentifié.
-//		System.out.println(msg);
-//		msg = PasserelleServicesWebXMLCorentin.connecter("europa", Outils.sha1("mdputilisateur"));
-//		//Utilisateur authentifié.
-//		System.out.println(msg);
-		
-		// test visuel de la méthode envoyerPosition
-		Date laDate = Outils.convertirEnDateHeure("24/01/2018 13:42:21");
-		
-		PointDeTrace lePoint = new PointDeTrace(23, 0, 48.15, -1.68, 50, laDate, 80);
-		msg = PasserelleServicesWebXMLGuillaume.envoyerPosition("europa", Outils.sha1("mdputilisateurrrrrr"), lePoint);
-		System.out.println(msg);
-=======
-		//msg = PasserelleServicesWebXMLCorentin.connecter("admin", "adminnnnnnnn");
-		//Erreur : authentification incorrecte.
-		//System.out.println(msg);
-		//msg = PasserelleServicesWebXMLCorentin.connecter("admin", Outils.sha1("mdpadmin"));
-		//Administrateur authentifié.
-		//System.out.println(msg);
-		//msg = PasserelleServicesWebXMLCorentin.connecter("europa", Outils.sha1("mdputilisateur"));
-		//Utilisateur authentifié.
-		//System.out.println(msg);
->>>>>>> branch 'master' of https://github.com/delasalle-sio-couasnon-c/traceGPS-API-Java.git
 	
 	} // fin Main
 } // fin class
