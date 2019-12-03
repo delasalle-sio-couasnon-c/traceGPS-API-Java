@@ -1,6 +1,8 @@
 package jim.testsvisuels;
 
 
+import static org.junit.Assert.assertEquals;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,12 +43,20 @@ public class TestPasserelleServicesWebXMLCorentin {
 		
 
 		// test visuel de la méthode getUnParcoursEtSesPoints
-		Trace laTrace = new Trace();
-		msg = PasserelleServicesWebXMLCorentin.getUnParcoursEtSesPoints("europa", "bf65a3f3eae46af8192408b64b6f1e8db1cbc6d8", 4, laTrace);
-		// affichage de la réponse
+//		Trace laTrace = new Trace();
+//		msg = PasserelleServicesWebXMLCorentin.getUnParcoursEtSesPoints("europa", "bf65a3f3eae46af8192408b64b6f1e8db1cbc6d8", 4, laTrace);
+//		// affichage de la réponse
+//		System.out.println(msg);
+//		// affichage de la trace
+//		System.out.println(laTrace.toString());
+		
+		
+		// test visuel de la méthode envoyerPosition
+		Date laDate = Outils.convertirEnDateHeure("24/01/2018 13:42:21");
+		
+		PointDeTrace lePoint = new PointDeTrace(23, 0, 48.15, -1.68, 50, laDate, 80);
+		msg = PasserelleServicesWebXMLCorentin.envoyerPosition("europa", Outils.sha1("mdputilisateurrrrrr"), lePoint);
 		System.out.println(msg);
-		// affichage de la trace
-		System.out.println(laTrace.toString());
 
 	} // fin Main
 } // fin class

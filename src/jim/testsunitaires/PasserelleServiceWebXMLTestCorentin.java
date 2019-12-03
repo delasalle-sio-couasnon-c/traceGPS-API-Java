@@ -119,8 +119,25 @@ public class PasserelleServiceWebXMLTestCorentin {
 	
 	@Test
 	public void testEnvoyerPosition() throws ParseException {
-		fail("Not yet implemented");
+		Date laDate = Outils.convertirEnDateHeure("24/01/2018 13:42:21");
+		
+		PointDeTrace lePoint = new PointDeTrace(23, 0, 48.15, -1.68, 50, laDate, 80);
+		String msg = PasserelleServicesWebXMLCorentin.envoyerPosition("europa", Outils.sha1("mdputilisateurrrrrr"), lePoint);
+		assertEquals("Erreur : authentification incorrecte.", msg);
+		
+		lePoint = new PointDeTrace(2333, 0, 48.15, -1.68, 50, laDate, 80);
+		msg = PasserelleServicesWebXMLCorentin.envoyerPosition("europa", "548a1209754e50b96dbfe4c1f7ca96403fccafc9", lePoint);
+		assertEquals("Erreur : le numéro de trace n'existe pas.", msg);
+		
+		lePoint = new PointDeTrace(22, 0, 48.15, -1.68, 50, laDate, 80);
+		msg = PasserelleServicesWebXMLCorentin.envoyerPosition("europa","548a1209754e50b96dbfe4c1f7ca96403fccafc9", lePoint);
+		assertEquals("Erreur : le numéro de trace ne correspond pas à cet utilisateur.", msg);	
+		
+		lePoint = new PointDeTrace(2, 0, 48.15, -1.68, 50, laDate, 80);
+		msg = PasserelleServicesWebXMLCorentin.envoyerPosition("callisto", "13e3668bbee30b004380052b086457b014504b3e", lePoint);
+		assertEquals("Point créé.", msg);	
 	}
+
 
 	@Test
 	public void testDemarrerEnregistrementParcours() {

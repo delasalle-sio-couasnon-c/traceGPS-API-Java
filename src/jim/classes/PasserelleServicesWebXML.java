@@ -459,7 +459,47 @@ public class PasserelleServicesWebXML extends PasserelleXML {
 	//    lePoint : un objet PointDeTrace (vide) qui permettra de récupérer le numéro attribué à partir des données fournies par le service web
 	public static String envoyerPosition(String pseudo, String mdpSha1, PointDeTrace lePoint)
 	{
-		return "";				// METHODE A CREER ET TESTER
+		String reponse = "";
+		try
+		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
+			String urlDuServiceWeb = _adresseHebergeur + _urlEnvoyerPosition;
+			urlDuServiceWeb += "?pseudo=" + pseudo;
+			urlDuServiceWeb += "&mdp="+ mdpSha1;
+			urlDuServiceWeb += "&idTrace=" + lePoint.getIdTrace();
+			urlDuServiceWeb += "&dateHeure=" + Outils.formaterDateHeureUS(lePoint.getDateHeure()).replace(" ", "%20");
+			urlDuServiceWeb += "&latitude=" + lePoint.getLatitude();
+			urlDuServiceWeb += "&longitude=" + lePoint.getLongitude();
+			urlDuServiceWeb += "&altitude=" + lePoint.getAltitude();
+			urlDuServiceWeb += "&rythmeCardio=" + lePoint.getRythmeCardio();
+
+			// http://localhost/ws-php-couasnon/tracegps/api/EnvoyerPosition?
+//			pseudo=europa&
+//					mdp=111111111111&
+//					idTrace=3&
+//					dateHeure=2018-01-19%2013:10:28&
+//					latitude=48.2159&
+//					longitude=-1.5485&
+//					altitude=110&
+//					rythmeCardio=86&
+//					lang=xml
+				
+			// création d'un flux en lecture (InputStream) à partir du service
+			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
+
+			// création d'un objet org.w3c.dom.Document à partir du flux ; il servira à parcourir le flux XML
+			Document leDocument = getDocumentXML(unFluxEnLecture);
+
+			// parsing du flux XML
+			Element racine = (Element) leDocument.getElementsByTagName("data").item(0);
+			reponse = racine.getElementsByTagName("reponse").item(0).getTextContent();
+
+			// retour de la réponse du service web
+			return reponse;
+		}
+		catch (Exception ex)
+		{	String msg = "Erreur : " + ex.getMessage();
+			return msg;
+		}
 	}
 	
 	// Méthode statique pour obtenir un parcours et la liste de ses points (service GetUnParcoursEtSesPoints)
