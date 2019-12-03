@@ -7,6 +7,7 @@ import java.util.Date;
 
 import jim.classes.Outils;
 import jim.classes.PasserelleServicesWebXML;
+import jim.classes.PasserelleServicesWebXMLYvan;
 import jim.classes.PasserelleServicesWebXMLCorentin;
 import jim.classes.PointDeTrace;
 import jim.classes.Trace;
@@ -37,20 +38,33 @@ public class TestPasserelleServicesWebXML {
 
 		
 		// test visuel de la méthode getLesParcoursDunUtilisateur
+		
+
+		// test visuel de la méthode getLesParcoursDunUtilisateur
+		ArrayList<Trace> lesTraces = new ArrayList<Trace>();
+		msg = PasserelleServicesWebXMLYvan.getLesParcoursDunUtilisateur("europa", "13e3668bbee30b004380052b086457b014504b3e", "callisto", lesTraces);
+		// affichage de la réponse
+		System.out.println(msg);
+		// affichage du nombre de traces
+		System.out.println("Nombre de traces : " + lesTraces.size());
+		// affichage de toutes les traces
+		for (Trace uneTrace : lesTraces)
+		{	System.out.println(uneTrace.toString());
+		}
 
 		
 		// test visuel de la méthode getUnParcoursEtSesPoints
 		
 		
-		msg = PasserelleServicesWebXMLCorentin.connecter("admin", "adminnnnnnnn");
+		//msg = PasserelleServicesWebXMLCorentin.connecter("admin", "adminnnnnnnn");
 		//Erreur : authentification incorrecte.
-		System.out.println(msg);
-		msg = PasserelleServicesWebXMLCorentin.connecter("admin", Outils.sha1("mdpadmin"));
+		//System.out.println(msg);
+		//msg = PasserelleServicesWebXMLCorentin.connecter("admin", Outils.sha1("mdpadmin"));
 		//Administrateur authentifié.
-		System.out.println(msg);
-		msg = PasserelleServicesWebXMLCorentin.connecter("europa", Outils.sha1("mdputilisateur"));
+		//System.out.println(msg);
+		//msg = PasserelleServicesWebXMLCorentin.connecter("europa", Outils.sha1("mdputilisateur"));
 		//Utilisateur authentifié.
-		System.out.println(msg);
+		//System.out.println(msg);
 	
 	} // fin Main
 } // fin class
