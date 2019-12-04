@@ -295,7 +295,7 @@ public class PasserelleServicesWebXMLGuillaume extends PasserelleXML {
 		{	// création d'un nouveau document XML à partir de l'URL du service web et des paramètres
 			String urlDuServiceWeb = _adresseHebergeur + _urlGetLesUtilisateursQuiMautorisent ;
 			urlDuServiceWeb += "?pseudo=" + pseudo;
-			urlDuServiceWeb += "&mdpSha1=" + mdpSha1;
+			urlDuServiceWeb += "&mdp=" + mdpSha1;
 
 			// création d'un flux en lecture (InputStream) à partir du service
 			InputStream unFluxEnLecture = getFluxEnLecture(urlDuServiceWeb);
